@@ -1,0 +1,25 @@
+Requests:
+
+GET :
+http://localhost:8080/automatedirrigationsystem/controller/getsensors
+
+
+POST : 
+
+1)  http://localhost:8080/automatedirrigationsystem/controller/addsensor
+
+	{
+	"sensor_name" : "New One",
+	
+		"min_value" : 0.0,
+	
+		"max_value": 2.0
+
+	}
+
+
+2) http://localhost:8080/automatedirrigationsystem/controller/deletesensor
+
+	5
+
+
