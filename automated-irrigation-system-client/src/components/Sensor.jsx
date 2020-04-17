@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Card, CardBody, CardHeader, Badge, Modal, Button } from "reactstrap";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Badge,
+  Modal,
+  Button,
+  CardFooter,
+} from "reactstrap";
 
 class Sensor extends Component {
   render() {
@@ -29,6 +37,18 @@ class Sensor extends Component {
             </Badge>
           </div>
         </CardBody>
+        <CardFooter>
+          <Button
+            size="sm"
+            color="danger"
+            outline
+            onClick={() => {
+              this.props.uninstallSensor(this.props.sensor.sensor_id);
+            }}
+          >
+            Uninstall
+          </Button>
+        </CardFooter>
       </Card>
     );
   }

@@ -15,6 +15,7 @@ class Container extends Component {
     this.handleInstallSensor = this.handleInstallSensor.bind(this);
     this.handleCancelInstall = this.handleCancelInstall.bind(this);
     this.handleStartInstallation = this.handleStartInstallation.bind(this);
+    this.handleUninstall = this.handleUninstall.bind(this);
   }
   componentDidMount() {
     axios.get("/getsensors").then((res) => {
@@ -40,6 +41,19 @@ class Container extends Component {
     });
     this.setState({ installSensorModal: false });
   };
+
+  handleUninstall = (id) => {
+    let sensors = this.state.sensors.filter(
+      (sensor) => sensor.sensor_id === id
+    );
+    console.log(sensors[0]);
+    axios.post(`/deletesensor`, sensors[0]).then(() => {
+      sensors = [];
+      sensors = this.state.sensors.filter((sensor) => sensor.sensor_id !== id);
+      this.setState({ sensors: sensors });
+    });
+  };
+
   render() {
     return (
       <div>
@@ -54,6 +68,7 @@ class Container extends Component {
             installSensor={this.handleInstallSensor}
             cancelInstall={this.handleCancelInstall}
             startInstallation={this.handleStartInstallation}
+            uninstallSensor={this.handleUninstall}
           />
         </div>
       </div>

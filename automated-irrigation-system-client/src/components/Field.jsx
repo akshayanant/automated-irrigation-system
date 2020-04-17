@@ -13,7 +13,13 @@ class Field extends Component {
   render() {
     const modal = this.props.modal;
     const sensorsMarkUp = this.props.sensors.map((sensor) => {
-      return <Sensor key={sensor.sensor_id} sensor={sensor} />;
+      return (
+        <Sensor
+          key={sensor.sensor_id}
+          sensor={sensor}
+          uninstallSensor={(id) => this.props.uninstallSensor(id)}
+        />
+      );
     });
     return (
       <div className="field-body">

@@ -23,3 +23,20 @@ POST :
 	5
 
 
+3) http://localhost:8080/automatedirrigationsystem/controller/heartbeat
+
+{
+	"sensor_id" : 1,
+	"cur_value" : 2
+}
+
+resp => 
+  {
+	"sensor_id" : 1,
+	"action" : increase_action/decrease_action/no_action,
+
+  }
+
+
+
+

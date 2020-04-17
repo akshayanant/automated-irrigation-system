@@ -16,8 +16,8 @@ class SensorInstallModal extends Component {
     super(props);
     this.state = {
       sensor_name: "",
-      min_value: 0,
-      max_value: 0,
+      min_value: 0.0,
+      max_value: 0.0,
     };
     this.handleChangeSensorName = this.handleChangeSensorName.bind(this);
     this.handleChangeMinValue = this.handleChangeMinValue.bind(this);

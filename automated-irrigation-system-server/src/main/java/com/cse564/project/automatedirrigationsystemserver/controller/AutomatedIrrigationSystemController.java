@@ -31,8 +31,8 @@ public class AutomatedIrrigationSystemController {
     }
 
     @PostMapping(path = Store.DELETE_SENSOR)
-    public void deleteSensor(@RequestBody Integer sensorID) {
-        sensorControlService.deleteSensor(sensorID);
+    public void deleteSensor( @RequestBody Sensor sensor) {
+        sensorControlService.deleteSensor(sensor.getSensorID());
     }
 
 

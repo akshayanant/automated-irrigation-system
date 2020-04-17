@@ -27,4 +27,10 @@ public class Sensor {
     private String sensor_name;
     private double min_value;
     private double max_value;
+
+public int getSensorID(){
+	return this.sensor_id;
 }
+}
+
+
