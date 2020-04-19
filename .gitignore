@@ -4,3 +4,16 @@ automated-irrigation-system-server/src/main/resources/application.properties
 automated-irrigation-system-server/src/main/resources/application.properties
 *.properties
 automated-irrigation-system-server/src/main/resources/application.properties
+/Backend-Automated-Irrigation-system/Backend-AutoIrrigation/Backend-AutoIrrigation/packages.config
+/Backend-Automated-Irrigation-system/Backend-AutoIrrigation/Backend-AutoIrrigation/Web.config
+/Backend-Automated-Irrigation-system/Backend-AutoIrrigation/Backend-AutoIrrigation/Web.Debug.config
+/Backend-Automated-Irrigation-system/Backend-AutoIrrigation/Backend-AutoIrrigation/Web.Release.config
+/Backend-Automated-Irrigation-system/Backend-AutoIrrigation/Backend-AutoIrrigation/Migrations
+/Backend-Automated-Irrigation-system/Backend-AutoIrrigation/Backend-AutoIrrigation/Scripts
+/Backend-Automated-Irrigation-system/Backend-AutoIrrigation/Backend-AutoIrrigation/obj
+/Backend-Automated-Irrigation-system/Backend-AutoIrrigation/Backend-AutoIrrigation/bin
+/Backend-Automated-Irrigation-system/Backend-AutoIrrigation/Backend-AutoIrrigation/App_Data
+/Backend-Automated-Irrigation-system/Backend-AutoIrrigation/.vs/Backend-AutoIrrigation/config
+/Backend-Automated-Irrigation-system/Backend-AutoIrrigation/.vs/Backend-AutoIrrigation/v16
+/Backend-Automated-Irrigation-system/Backend-AutoIrrigation/Backend-AutoIrrigation.sln
+/Backend-Automated-Irrigation-system/Backend-AutoIrrigation/packages
