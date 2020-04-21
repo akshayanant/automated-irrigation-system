@@ -4,6 +4,8 @@ import { Navbar } from "reactstrap";
 import Simulator from "./Simulator";
 import Field from "./Field";
 import axios from "axios";
+import Sensor from "./Sensor";
+import { INCREASE, NO_ACTION, INCR_VALUE, DECREASE } from "../util/store";
 
 class Container extends Component {
   constructor(props) {
@@ -16,12 +18,46 @@ class Container extends Component {
     this.handleCancelInstall = this.handleCancelInstall.bind(this);
     this.handleStartInstallation = this.handleStartInstallation.bind(this);
     this.handleUninstall = this.handleUninstall.bind(this);
+    this.handleSimulations = this.handleSimulations.bind(this);
+    this.handleHeartBeat = this.handleHeartBeat.bind(this);
   }
   componentDidMount() {
     axios.get("/getsensors").then((res) => {
       console.log(res.data);
-      this.setState({ sensors: res.data });
+      let sensors = [];
+      res.data.forEach((sensor) => {
+        sensors.push({
+          sensor_id: sensor.sensor_id,
+          sensor_name: sensor.sensor_name,
+          value: (sensor.min_value + sensor.max_value) / 2.0,
+          action: NO_ACTION,
+        });
+      });
+      this.setState({ sensors: sensors });
     });
+
+    setInterval(() => {
+      let sensors = [];
+      this.state.sensors.forEach((sensor) => {
+        if (sensor.action === INCREASE) {
+          sensors.push({
+            ...sensor,
+            value: sensor.value + INCR_VALUE,
+          });
+        } else if (sensor.action === DECREASE) {
+          sensors.push({
+            ...sensor,
+            value: sensor.value - INCR_VALUE,
+          });
+        } else {
+          sensors.push({
+            ...sensor,
+            action: NO_ACTION,
+          });
+        }
+      });
+      this.setState({ sensors: sensors });
+    }, 1000);
   }
 
   handleInstallSensor = () => {
@@ -36,20 +72,60 @@ class Container extends Component {
     console.log(sensorDetails);
     axios.post("/addsensor", sensorDetails).then((res) => {
       let sensors = this.state.sensors;
-      sensors.push(res.data);
+      const sensor = res.data;
+      sensors.push({
+        sensor_id: sensor.sensor_id,
+        sensor_name: sensor.sensor_name,
+        value: (sensor.min_value + sensor.max_value) / 2.0,
+        action: NO_ACTION,
+      });
       this.setState({ sensors: sensors });
     });
     this.setState({ installSensorModal: false });
   };
 
   handleUninstall = (id) => {
-    let sensors = this.state.sensors.filter(
-      (sensor) => sensor.sensor_id === id
-    );
-    console.log(sensors[0]);
-    axios.post(`/deletesensor`, sensors[0]).then(() => {
-      sensors = [];
-      sensors = this.state.sensors.filter((sensor) => sensor.sensor_id !== id);
+    console.log(id);
+    axios.post(`/deletesensor?sensor_id=${id}`).then(() => {
+      let sensors = this.state.sensors.filter(
+        (sensor) => sensor.sensor_id !== id
+      );
+      this.setState({ sensors: sensors });
+    });
+  };
+
+  handleSimulations = (id, action) => {
+    let sensors = [];
+    const delta = action === "incr" ? 1 : -1;
+    this.state.sensors.forEach((sensor) => {
+      if (sensor.sensor_id === id) {
+        const newSensor = { ...sensor, value: sensor.value + delta };
+        sensors.push(newSensor);
+      } else {
+        sensors.push(sensor);
+      }
+    });
+    this.setState({ sensors: sensors });
+  };
+
+  handleHeartBeat = (id, value) => {
+    const hearBeatData = {
+      sensor_id: id,
+      cur_value: value,
+    };
+    axios.post("/heartbeat", hearBeatData).then((res) => {
+      const actuator = res.data;
+      let sensors = [];
+      this.state.sensors.forEach((sensor) => {
+        if (sensor.sensor_id === id) {
+          sensors.push({
+            ...sensor,
+            action: actuator.action,
+          });
+        } else {
+          sensors.push(sensor);
+        }
+      });
       this.setState({ sensors: sensors });
     });
   };
@@ -61,7 +137,10 @@ class Container extends Component {
           <h5>Automated Irrigation System</h5>
         </Navbar>
         <div className="container-body">
-          <Simulator sensors={this.state.sensors} />
+          <Simulator
+            sensors={this.state.sensors}
+            simulation={this.handleSimulations}
+          />
           <Field
             sensors={this.state.sensors}
             modal={this.state.installSensorModal}
@@ -69,6 +148,7 @@ class Container extends Component {
             cancelInstall={this.handleCancelInstall}
             startInstallation={this.handleStartInstallation}
             uninstallSensor={this.handleUninstall}
+            heartBeat={this.handleHeartBeat}
           />
         </div>
       </div>

@@ -8,6 +8,5 @@ public interface Store {
     public static final String GET_SENSORS = "/getsensors";
     public static final String ADD_SENSOR = "/addsensor";
     public static final String DELETE_SENSOR = "/deletesensor";
-
-
+    public static final String HEART_BEAT = "/heartbeat";
 }

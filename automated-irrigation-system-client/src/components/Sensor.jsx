@@ -7,49 +7,70 @@ import {
   Modal,
   Button,
   CardFooter,
+  Spinner,
 } from "reactstrap";
 
+import { TIME_SLICE, INCREASE, DECREASE } from "./../util/store";
+
 class Sensor extends Component {
+  componentDidMount() {
+    setInterval(() => {
+      this.props.heartBeat(
+        this.props.sensor.sensor_id,
+        this.props.sensor.value
+      );
+    }, TIME_SLICE);
+  }
+
   render() {
     const sensor = this.props.sensor;
+    let changeMarkUp = <p></p>;
+    if (sensor.action === INCREASE) {
+      changeMarkUp = (
+        <div>
+          {" "}
+          Increasing {"  "}
+          <Spinner color="primary" />
+        </div>
+      );
+    } else if (sensor.action === DECREASE) {
+      changeMarkUp = (
+        <div>
+          {" "}
+          Decreasing {"  "}
+          <Spinner color="danger" />
+        </div>
+      );
+    }
 
     return (
-      <Card className="sensor-card">
-        <CardHeader>
-          <h4>{sensor.sensor_name}</h4>
-        </CardHeader>
-        <CardBody>
-          <div>
-            <Badge>
-              <h6>Min Value : </h6>
-            </Badge>
-
-            <Badge>
-              <h6>{sensor.min_value}</h6>
-            </Badge>
-          </div>
-          <div>
-            <Badge>
-              <h6>Max Value : </h6>
-            </Badge>
-            <Badge>
-              <h6>{sensor.max_value}</h6>
-            </Badge>
-          </div>
-        </CardBody>
-        <CardFooter>
-          <Button
-            size="sm"
-            color="danger"
-            outline
-            onClick={() => {
-              this.props.uninstallSensor(this.props.sensor.sensor_id);
-            }}
-          >
-            Uninstall
-          </Button>
-        </CardFooter>
-      </Card>
+      <div className="sensor-card-container">
+        <Card className="sensor-card">
+          <CardHeader>
+            <h4>{sensor.sensor_name}</h4>
+          </CardHeader>
+          <CardBody>
+            <div>
+              <Badge color="light">
+                <h3>{sensor.value}</h3>
+              </Badge>
+            </div>
+            {changeMarkUp}
+          </CardBody>
+          <CardFooter>
+            <Button
+              size="sm"
+              color="danger"
+              outline
+              onClick={() => {
+                this.props.uninstallSensor(this.props.sensor.sensor_id);
+              }}
+            >
+              Uninstall
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
     );
   }
 }

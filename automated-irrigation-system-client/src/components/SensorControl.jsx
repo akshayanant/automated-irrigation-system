@@ -1,15 +1,40 @@
 import React, { Component } from "react";
-import { Card, CardBody, CardHeader } from "reactstrap";
+import { Card, CardBody, CardHeader, Button } from "reactstrap";
 
 class SensorControl extends Component {
   render() {
     const sensor = this.props.sensor;
     return (
-      <Card>
+      <Card className="sensor-control-card">
         <CardHeader>
           <h4>{sensor.sensor_name}</h4>
         </CardHeader>
-        <CardBody></CardBody>
+        <CardBody>
+          <div className="sensor-control-card-body">
+            <div className="sensor-control-Buttons">
+              <Button
+                size="sm"
+                color="primary"
+                outline
+                block
+                onClick={() => this.props.simulation(sensor.sensor_id, "decr")}
+              >
+                -
+              </Button>
+            </div>
+            <div className="sensor-control-Buttons">
+              <Button
+                size="sm"
+                color="danger"
+                outline
+                block
+                onClick={() => this.props.simulation(sensor.sensor_id, "incr")}
+              >
+                +
+              </Button>
+            </div>
+          </div>
+        </CardBody>
       </Card>
     );
   }

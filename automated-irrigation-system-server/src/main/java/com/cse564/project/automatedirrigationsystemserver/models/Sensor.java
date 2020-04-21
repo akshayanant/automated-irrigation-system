@@ -28,9 +28,13 @@ public class Sensor {
     private double min_value;
     private double max_value;
 
-public int getSensorID(){
-	return this.sensor_id;
-}
+    public double getMax_value() {
+        return max_value;
+    }
+
+    public double getMin_value() {
+        return min_value;
+    }
 }
 
 

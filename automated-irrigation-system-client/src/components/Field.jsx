@@ -18,6 +18,7 @@ class Field extends Component {
           key={sensor.sensor_id}
           sensor={sensor}
           uninstallSensor={(id) => this.props.uninstallSensor(id)}
+          heartBeat={(id, value) => this.props.heartBeat(id, value)}
         />
       );
     });

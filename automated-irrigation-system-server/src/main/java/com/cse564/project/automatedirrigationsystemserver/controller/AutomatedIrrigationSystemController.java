@@ -1,5 +1,7 @@
 package com.cse564.project.automatedirrigationsystemserver.controller;
 
+import com.cse564.project.automatedirrigationsystemserver.models.Actuator;
+import com.cse564.project.automatedirrigationsystemserver.models.HeartBeatData;
 import com.cse564.project.automatedirrigationsystemserver.models.Sensor;
 import com.cse564.project.automatedirrigationsystemserver.resources.Store;
 import com.cse564.project.automatedirrigationsystemserver.services.SensorControlService;
@@ -31,9 +33,16 @@ public class AutomatedIrrigationSystemController {
     }
 
     @PostMapping(path = Store.DELETE_SENSOR)
-    public void deleteSensor( @RequestBody Sensor sensor) {
-        sensorControlService.deleteSensor(sensor.getSensorID());
+    public void deleteSensor(Integer sensor_id) {
+        sensorControlService.deleteSensor(sensor_id);
     }
+
+    @PostMapping(path = Store.HEART_BEAT)
+    public Actuator heartBeat(@RequestBody HeartBeatData heartBeatData){
+        return sensorControlService.heartBeat(heartBeatData);
+    }
+
+
 
 
 }
