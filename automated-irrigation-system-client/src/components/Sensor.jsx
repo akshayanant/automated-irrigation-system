@@ -47,12 +47,12 @@ class Sensor extends Component {
       <div className="sensor-card-container">
         <Card className="sensor-card">
           <CardHeader>
-            <h4>{sensor.sensor_name}</h4>
+            <h6>{sensor.sensor_name}</h6>
           </CardHeader>
           <CardBody>
             <div>
               <Badge color="light">
-                <h3>{sensor.value}</h3>
+                <h4>{sensor.value}</h4>
               </Badge>
             </div>
             {changeMarkUp}

@@ -133,8 +133,8 @@ class Container extends Component {
   render() {
     return (
       <div>
-        <Navbar color="light">
-          <h5>Automated Irrigation System</h5>
+        <Navbar color="secondary">
+          <h3 style={{ color: "white" }}>Automated Irrigation System</h3>
         </Navbar>
         <div className="container-body">
           <Simulator

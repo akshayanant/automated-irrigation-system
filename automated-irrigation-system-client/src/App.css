@@ -56,10 +56,10 @@
 .sensor-card {
   margin: 10px;
   color: darkblue;
-  min-height: 300px;
+  min-height: 230px;
   align-items: center;
 }
 
 .sensor-card-container {
-  min-width: 30%;
+  min-width: 20%;
 }

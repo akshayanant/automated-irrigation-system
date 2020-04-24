@@ -7,7 +7,7 @@ class SensorControl extends Component {
     return (
       <Card className="sensor-control-card">
         <CardHeader>
-          <h4>{sensor.sensor_name}</h4>
+          <h6>{sensor.sensor_name}</h6>
         </CardHeader>
         <CardBody>
           <div className="sensor-control-card-body">
