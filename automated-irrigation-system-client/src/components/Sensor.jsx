@@ -4,7 +4,6 @@ import {
   CardBody,
   CardHeader,
   Badge,
-  Modal,
   Button,
   CardFooter,
   Spinner,

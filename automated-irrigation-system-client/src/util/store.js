@@ -1,4 +1,4 @@
-export const TIME_SLICE = 2000;
+export const TIME_SLICE = 1000;
 
 export const NO_ACTION = "NO_ACTION";
 

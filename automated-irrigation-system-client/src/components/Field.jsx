@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+import { Button } from "reactstrap";
 
 import Sensor from "./Sensor";
 import SensorInstallModal from "./SensorInstallModal";

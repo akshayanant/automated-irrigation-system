@@ -4,7 +4,6 @@ import { Navbar } from "reactstrap";
 import Simulator from "./Simulator";
 import Field from "./Field";
 import axios from "axios";
-import Sensor from "./Sensor";
 import { INCREASE, NO_ACTION, INCR_VALUE, DECREASE } from "../util/store";
 
 class Container extends Component {
